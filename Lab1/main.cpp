@@ -14,7 +14,7 @@ struct type_flights {
     string flight_number;
     string departure_city;
     string arrival_city;
-    string flight_cost;
+    float flight_cost{};
 };
 
 //declaring functions
@@ -55,67 +55,83 @@ int main() {
         getline(ss, flights_array[i].arrival_city, ',');
         ss >> flights_array[i].flight_cost;
     }
-    for (int i = 0; i < count; i++) { //print the array
+    cout << "The first 5 flights are: " << endl;
+    for (int i = 0; i < 5; i++) { //print the array
+
         cout << flights_array[i].flight_number << " "
              << flights_array[i].departure_city << " "
              << flights_array[i].arrival_city << " "
              << flights_array[i].flight_cost << endl;
     }
+    cout << "The last 5 flights are:" << endl;
+    for (int i = count - 5; i < count; i++) { //print the array
+        cout << flights_array[i].flight_number << " "
+             << flights_array[i].departure_city << " "
+             << flights_array[i].arrival_city << " "
+             << flights_array[i].flight_cost << endl;
+    }
+    cout << endl;
     flights.close(); //close file
     int cheapest = find_cheapest(
             flights_array); //assign cheapest flight function result to variable
     cout << "Cheapest flight: " << flights_array[cheapest].flight_number << " "
          << flights_array[cheapest].departure_city << " "
          << flights_array[cheapest].arrival_city << " "
-         << flights_array[cheapest].flight_cost << endl;
+         << flights_array[cheapest].flight_cost << endl << endl;
 
     //print the number of flights to each city
     if (arrivaldeparture_count(flights_array, "Chicago") == 0) {
-        cout << "There are no flights to Chicago" << endl;
+        cout << "There are no flights to/from Chicago" << endl;
     } else {
         cout << "There are " << arrivaldeparture_count(flights_array, "Chicago")
-             << " flight(s) to Chicago" << endl;
+             << " flight(s) to/from Chicago" << endl;
     }
     if (arrivaldeparture_count(flights_array, "Taipei") == 0) {
-        cout << "There are no flights to Taipei" << endl;
+        cout << "There are no flights to/from Taipei" << endl;
     } else {
         cout << "There are " << arrivaldeparture_count(flights_array, "Taipei")
-             << " flight(s) to Taipei" << endl;
+             << " flight(s) to/from Taipei" << endl;
     }
-    cout << "There are " << arrivaldeparture_count(flights_array, "Washington")
-         << " flight(s) to Washington" << endl;
+    if (arrivaldeparture_count(flights_array, "Washington") == 0) {
+        cout << "There are no flights to/from Washington" << endl;
+    }
+    else {
+        cout << "There are "
+             << arrivaldeparture_count(flights_array, "Washington")
+             << " flight(s) to/from Washington" << endl;
+    }
     if (arrivaldeparture_count(flights_array, "Kingston") == 0) {
-        cout << "There are no flights to Kingston" << endl;
+        cout << "There are no flights to/from Kingston" << endl << endl;
     } else {
         cout << "There are "
              << arrivaldeparture_count(flights_array, "Kingston")
-             << " flight(s) to Kingston" << endl;
+             << " flight(s) to/from Kingston" << endl << endl;
     }
 
     //print the average price of flights to each city
     if (average_price(flights_array, "Chicago") == 0) {
-        cout << "There are no flights to Chicago" << endl;
+        cout << "There are no flights from Chicago" << endl;
     } else {
-        cout << "The average price of flights to Chicago is $"
-             << average_price(flights_array, "Chicago") << endl;
+        cout << "The average price of flights from Chicago is $"
+             << printf("%0.1f", average_price(flights_array, "Chicago")) << endl;
     }
     if (average_price(flights_array, "Paris") == 0) {
-        cout << "There are no flights to Paris" << endl;
+        cout << "There are no flights from Paris" << endl;
     } else {
-        cout << "The average price of flights to Paris is $"
-             << average_price(flights_array, "Paris") << endl;
+        cout << "The average price of flights from Paris is $"
+             << printf("%0.1f", average_price(flights_array, "Paris")) << endl;
     }
     if (average_price(flights_array, "Kingston") == 0) {
-        cout << "There are no flights to Kingston" << endl;
+        cout << "There are no flights from Kingston" << endl << endl;
     } else {
-        cout << "The average price of flights to Kingston is $"
-             << average_price(flights_array, "Kingston") << endl;
+        cout << "The average price of flights from Kingston is $"
+             << printf("%0.1f", average_price(flights_array, "Kingston")) << endl << endl;
     }
 
     //sort the flights by flight number
     sort_flights(flights_array, count);
     cout << "The first 10 flights: " << endl;
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < 10; i++) {
         cout << flights_array[i].flight_number << " "
              << flights_array[i].departure_city << " "
              << flights_array[i].arrival_city << " "
@@ -134,21 +150,36 @@ int main() {
 //function to find the cheapest flight
 int find_cheapest(type_flights flights_array[]) {
     int cheapest = 0; //initialize cheapest to 0
+    int countline = 0;
+    ifstream flights;
+    flights.open("flights_all.dat");
+    while (!flights.eof()) {
+        string line;
+        getline(flights, line);
+        countline++;
+    }
     for (int i = 0;
-         i < 10; i++) { //loop through the array and compare the flight cost
-        if (stoi(flights_array[i].flight_cost) <
-            stoi(flights_array[cheapest].flight_cost)) {
+         i < countline - 1; i++) { //loop through the array and compare the flight cost
+        if (flights_array[i].flight_cost < flights_array[cheapest].flight_cost) {
             cheapest = i; //assign the index of the cheapest flight to the variable
         }
     }
+    flights.close();
     return cheapest; //return index
 }
 
 //function to count the number of flights to a city
 int arrivaldeparture_count(type_flights flights_array[], const string &query) {
     int count = 0; //initialize count to 0
-    for (int i = 0;
-         i < 10; i++) { //loop through the array and compare the arrival city
+    int countline = 0;
+    ifstream flights;
+    flights.open("flights_all.dat");
+    while (!flights.eof()) {
+        string line;
+        getline(flights, line);
+        countline++;
+    }
+    for (int i = 0; i < countline - 1; i++) { //loop through the array and compare the arrival/dep city
         if (flights_array[i].arrival_city == query) {
             count++; //+1 count
         }
@@ -159,6 +190,7 @@ int arrivaldeparture_count(type_flights flights_array[], const string &query) {
     if (count == 0) { //if count is 0, return 0
         return 0;
     }
+    flights.close();
     return count;
 }
 
@@ -166,12 +198,19 @@ int arrivaldeparture_count(type_flights flights_array[], const string &query) {
 float average_price(type_flights flights_array[], const string &query) {
     float count = 0; //initialize count to 0
     float total = 0;
+    int countline = 0;
+    ifstream flights;
+    flights.open("flights_all.dat");
+    while(!flights.eof()){
+        string line;
+        getline(flights, line);
+        countline++;
+    }
     for (int i = 0;
-         i < 10; i++) { //loop through the array and compare the departure city
+         i < countline - 1; i++) { //loop through the array and compare the departure city
         if (flights_array[i].departure_city == query) {
             count++;
-            total += stof(
-                    flights_array[i].flight_cost); //add the flight cost to total
+            total += flights_array[i].flight_cost; //add the flight cost to total
         }
     }
     if (count == 0) {
