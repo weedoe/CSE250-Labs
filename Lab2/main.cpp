@@ -28,7 +28,7 @@ int sort_flights(type_flights flights_array[], int n);
 
 int main() {
     ifstream flights; //open file stream
-    flights.open("flights_all.dat"); //open file
+    flights.open("flights_10.dat"); //open file
     if (!flights.is_open()) { //checks if file open fails
         cerr << "Error opening file" << endl;
         return 1;
@@ -44,7 +44,7 @@ int main() {
     }
     flights.close(); //close file
     auto *flights_array = new type_flights[count]; //dynamically allocate memory for the array
-    flights.open("flights_all.dat"); //open file
+    flights.open("flights_10.dat"); //open file
     string tmp; //temporary string to store the line
     for (int i = 0;
          i < count; i++) { //read the file and store the values in the array
@@ -152,7 +152,7 @@ int find_cheapest(type_flights flights_array[]) {
     int cheapest = 0; //initialize cheapest to 0
     int countline = 0;
     ifstream flights;
-    flights.open("flights_all.dat");
+    flights.open("flights_10.dat");
     while (!flights.eof()) {
         string line;
         getline(flights, line);
@@ -173,7 +173,7 @@ int arrivaldeparture_count(type_flights flights_array[], const string &query) {
     int count = 0; //initialize count to 0
     int countline = 0;
     ifstream flights;
-    flights.open("flights_all.dat");
+    flights.open("flights_10.dat");
     while (!flights.eof()) {
         string line;
         getline(flights, line);
@@ -200,7 +200,7 @@ float average_price(type_flights flights_array[], const string &query) {
     float total = 0;
     int countline = 0;
     ifstream flights;
-    flights.open("flights_all.dat");
+    flights.open("flights_10.dat");
     while(!flights.eof()){
         string line;
         getline(flights, line);
@@ -221,15 +221,17 @@ float average_price(type_flights flights_array[], const string &query) {
 
 //function to sort the flights by flight number
 int sort_flights(type_flights flights_array[], int n) {
-    for (int i = 1; i < n; i++) { //insertion sort algorithm
-        type_flights key = flights_array[i]; //assign the current element to key
-        int j = i - 1; //assign j to the previous element
-        while (j >= 0 && (flights_array[j].flight_number) >
-                         (key.flight_number)) { //compare the flight numbers
-            flights_array[j + 1] = flights_array[j]; //shift the elements
-            j--; //-1 j
+    for (int i = 0; i < n - 1; i++) {
+        int min = i;
+        for (int j = i + 1; j < n; j++) {
+            if (flights_array[j].flight_number <
+                flights_array[min].flight_number) {
+                min = j;
+            }
         }
-        flights_array[j + 1] = key; //assign the key to the new position
+        type_flights temp = flights_array[min];
+        flights_array[min] = flights_array[i];
+        flights_array[i] = temp;
     }
     return 0;
 }
