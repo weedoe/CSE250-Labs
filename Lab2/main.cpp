@@ -1,6 +1,6 @@
 //OCdt Paterson 30648
-//Date: 2024-01-30
-//Lab 1
+//Date: 2024-02-15
+//Lab 2
 //A program to read through a .dat file and to perform functions such as sorting
 //based on the data within the file
 
@@ -24,7 +24,7 @@ int sort_flights(type_flights flights_array[], int n);
 
 int main() {
     ifstream flights;
-    string file_name = "flights_10.dat";
+    string file_name = "flights_all_fixed.dat";
     int count = open_file(flights, file_name);
     type_flights flights_array[count];
     flights.open(file_name);
