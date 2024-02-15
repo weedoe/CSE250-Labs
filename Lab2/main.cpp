@@ -24,6 +24,7 @@ int selection_sort_flights(type_flights flights_array[], int n);
 void firstlast_flights(type_flights flights_array[], int n);
 int merge_sort_flights(type_flights flights_array[], int L, int R);
 int quick_sort_flights(type_flights flights_array[], int L, int R);
+void binary_search_flight(type_flights flights_array[], int n, string flight_number);
 
 
 int main() {
@@ -129,7 +130,31 @@ int main() {
 
     delete[] flights_array;
 
+    cout << "----------Question 4----------" << endl;
+    cout << "Quick sort is slower on a sorted array because it has to search through the whole array to find the pivot."
+            " Then it has to perform the entire sort." << endl;
 
+    cout << "----------Question 5----------" << endl;
+    open_file(flights, file_name);
+    flights_array = new type_flights[count];
+    flights.open(file_name);
+    if (!flights.is_open()) {
+        cerr << "Error opening file" << endl;
+    }
+    for (i = 0; i < count; i++) { //read the file and store the values in the array
+        getline(flights, tmp);
+        stringstream ss(tmp);
+        getline(ss, flights_array[i].flight_number, ',');
+        getline(ss, flights_array[i].departure_city, ',');
+        getline(ss, flights_array[i].arrival_city, ',');
+        ss >> flights_array[i].flight_cost;
+    }
+    flights.close();
+    string number;
+    quick_sort_flights(flights_array, 0, count - 1); //sort the flights by flight number
+    binary_search_flight(flights_array, count, "CZ0819");
+    binary_search_flight(flights_array, count, "FL0044");
+    binary_search_flight(flights_array, count, "GH2333");
 
     return 0;
 }
@@ -258,4 +283,22 @@ int quick_sort_flights(type_flights flights_array[], int L, int R) {
         quick_sort_flights(flights_array, j + 1, R);
     }
     return 0;
+}
+void binary_search_flight(type_flights flights_array[], int n, string flight_number) {
+    int L = 0;
+    int R = n - 1;
+    while (L <= R) {
+        int M = (L + R) / 2;
+        if (flights_array[M].flight_number == flight_number) {
+            cout << "The flight " << flight_number << " leaves " << flights_array[M].departure_city
+                 << " for " << flights_array[M].arrival_city << " and costs " << flights_array[M].flight_cost
+                 << endl;
+            return;
+        } else if (flights_array[M].flight_number < flight_number) {
+            L = M + 1;
+        } else {
+            R = M - 1;
+        }
+    }
+    cout << "The flight " << flight_number << " does not exist!" << endl;
 }
