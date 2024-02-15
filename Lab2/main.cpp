@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 
 using namespace std;
 //declaring struct
@@ -20,6 +21,7 @@ struct type_flights {
 //declaring functions
 int open_file(ifstream &flights, const string &file_name);
 int sort_flights(type_flights flights_array[], int n);
+void firstlast_flights(type_flights flights_array[], int n);
 
 
 int main() {
@@ -43,39 +45,13 @@ int main() {
         ss >> flights_array[i].flight_cost;
     }
     flights.close();
-    cout << "The first 5 flights are: " << endl;
-    for (i = 0; i < 5; i++) { //print the array
 
-        cout << flights_array[i].flight_number << " "
-             << flights_array[i].departure_city << " "
-             << flights_array[i].arrival_city << " "
-             << flights_array[i].flight_cost << endl;
-    }
-    cout << "The last 5 flights are:" << endl;
-    for  (i = count - 5; i < count; i++) { //print the array
-        cout << flights_array[i].flight_number << " "
-             << flights_array[i].departure_city << " "
-             << flights_array[i].arrival_city << " "
-             << flights_array[i].flight_cost << endl;
-    }
-    cout << endl;
+    firstlast_flights(flights_array, count); //print the first and last 5 flights
 
     //sort the flights by flight number
     sort_flights(flights_array, count);
-    cout << "The first 10 flights: " << endl;
-    for (int i = 0; i < 10; i++) {
-        cout << flights_array[i].flight_number << " "
-             << flights_array[i].departure_city << " "
-             << flights_array[i].arrival_city << " "
-             << flights_array[i].flight_cost << endl;
-    }
-    cout << "The last 10 flights: " << endl;
-    for (int i = count - 10; i < count; i++) {
-        cout << flights_array[i].flight_number << " "
-             << flights_array[i].departure_city << " "
-             << flights_array[i].arrival_city << " "
-             << flights_array[i].flight_cost << endl;
-    }
+
+    firstlast_flights(flights_array, count); //print the first and last 5 flights
     return 0;
 }
 
@@ -112,4 +88,21 @@ int sort_flights(type_flights flights_array[], int n) {
         flights_array[i] = temp;
     }
     return 0;
+}
+void firstlast_flights(type_flights flights_array[], int n) {
+    cout << "The first 5 flights are: " << endl;
+    for (int i = 0; i < 5; i++) { //print the array
+        cout << flights_array[i].flight_number << " "
+             << flights_array[i].departure_city << " "
+             << flights_array[i].arrival_city << " "
+             << flights_array[i].flight_cost << endl;
+    }
+    cout << "The last 5 flights are:" << endl;
+    for (int i = n - 5; i < n; i++) { //print the array
+        cout << flights_array[i].flight_number << " "
+             << flights_array[i].departure_city << " "
+             << flights_array[i].arrival_city << " "
+             << flights_array[i].flight_cost << endl;
+    }
+    cout << endl;
 }
