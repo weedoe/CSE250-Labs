@@ -115,6 +115,7 @@ int main() {
     cout << "MERGE REsort took " << total_time / CLOCKS_PER_SEC << " seconds" << endl << endl;
 
     delete[] flights_array;
+    flights.close();
 
     //Question 3
     cout << "----------Question 3----------" << endl;
@@ -146,6 +147,7 @@ int main() {
     cout << "QUICK REsort took " << total_time / CLOCKS_PER_SEC << " seconds" << endl << endl;
 
     delete[] flights_array;
+    flights.close();
 
     //Question 4
     cout << "----------Question 4----------" << endl;
@@ -175,6 +177,7 @@ int main() {
     binary_search_flight(flights_array, count, "CZ0819"); //search for the flight number
     binary_search_flight(flights_array, count, "FL0044");
     binary_search_flight(flights_array, count, "GH2333");
+    flights.close();
 
     //PART 2
 
