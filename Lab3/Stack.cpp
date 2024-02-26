@@ -2,7 +2,7 @@
  * Stack.cpp
  *
  *  Created on:
- *      Author: YOUR NAME
+ *      Author: OCdt Paterson
  *
  *
  *  Implementation details: ?
@@ -37,30 +37,41 @@ bool Stack::IsEmpty() {
  *  WHAT IS THE O() OF YOUR METHOD? EXPLAIN IN YOUR REPORT (or via couts in the main)
  */
 void Stack::PrintStack() {
-    //TODO
+    while (!IsEmpty()) {
+        cout << Top() << endl;
+        Pop();
+    }
 }
 
 /** Adds a string on the top of the stack in O(1).
  * Args: New string to put on top of the stack.
  */
 void Stack::Push(const string &new_value) {
-	//TODO
+    while (!IsEmpty()) {
+        m_List.InsertFirst(new_value);
+    }
 }
 
 /** Removes and returns the string on the top of the stack in O(1).
  * Return: string on top of the stack or "" if empty.
  */
 string Stack::Pop() {
-	//TODO
-	return string("");
+    if (!IsEmpty()) {
+        string top = Top();
+        m_List.RemoveFirst();
+        return top;
+    }
+	return {""};
 }
 
 /** Returns the string on the top of the stack in O(1).
  * Return: String on top of the stack or "" if empty.
  * */
 string Stack::Top() {
-	//TODO
-	return string("");
+    if (!IsEmpty()) {
+        return m_List.RemoveFirst();
+    }
+	return {""};
 }
 
 

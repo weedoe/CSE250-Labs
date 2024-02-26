@@ -2,7 +2,7 @@
  * LinkedList.h
  *
  *  Created on:
- *      Author: YOUR NAME
+ *      Author: OCdt Paterson
  *
  *
  *  Implementation details: ?
@@ -20,7 +20,7 @@ using namespace std;
 
 /** Constructs an empty list.  */
 LinkedList::LinkedList() {
-    //TODO
+    m_First = nullptr;
 };
 
 /** Deletes an empty list by freeing nodes memory. */
@@ -34,14 +34,28 @@ LinkedList::~LinkedList() {
  * Return: Length of the list
  */
 int LinkedList::Length() {
-    //TODO
-	return 0;
+    int count = 0;
+    Node* current = m_First;
+    while (current != nullptr) {
+        count++;
+        current = current->next;
+    }
+	return count;
 }
 
 /** Prints all the element of the list using cout, on a single line, separated by a comma. eg: [3, 19, 2, 36].*/
 void LinkedList::PrintList() {
     if (m_First != nullptr) {
-        //TODO
+Node* current = m_First;
+        cout << "[";
+        while (current != nullptr) {
+            cout << current->value;
+            if (current->next != nullptr) {
+                cout << ", ";
+            }
+            current = current->next;
+        }
+        cout << "]" << endl;
 
     } else {
         cout << "[]" << endl;
@@ -52,7 +66,14 @@ void LinkedList::PrintList() {
  * Args: new_value is the new string to put in the list
  */
 void LinkedList::InsertFirst(const string &new_value){
-	//TODO
+	Node* newnode = new Node;
+    newnode->value = new_value;
+    newnode->next = m_First;
+    newnode->prev = nullptr;
+    if (m_First != nullptr) {
+        m_First->prev = newnode;
+    }
+    m_First = newnode;
 }
 
 
@@ -63,7 +84,10 @@ string LinkedList::RemoveFirst() {
 	if (m_First != nullptr) {
 		string ret = m_First->value;
 		Node* todel = m_First;
-		//TODO
+		m_First = m_First->next;
+        if (m_First != nullptr) {
+            m_First->prev = nullptr;
+        }
 		delete todel;
 		return ret;
 	} else {
@@ -75,7 +99,15 @@ string LinkedList::RemoveFirst() {
  *  Args: index node position =  1st node at index 0, 2nd at index 1, etc...
  *  Return: "" if the index does not exists */
 string LinkedList::GetValueAt(int index) {
-	//TODO
+	    Node* current = m_First;
+    int count = 0;
+    while (current != nullptr) {
+        if (count == index) {
+            return current->value;
+        }
+        count++;
+        current = current->next;
+    }
 	return "";
 }
 

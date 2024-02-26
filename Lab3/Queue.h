@@ -2,7 +2,7 @@
  * Queue.h
  *
  *  Created on:
- *      Author: YOUR NAME
+ *      Author: OCdt Paterson
  *
  *
  *  Implementation details: ?

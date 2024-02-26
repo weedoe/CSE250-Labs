@@ -2,7 +2,7 @@
  * Queue.cpp
  *
  *  Created on:
- *      Author: YOUR NAME
+ *      Author: OCdt Paterson
  *
  *
  *  Implementation details: ?
@@ -13,13 +13,70 @@
  \***************************************************************************/
 
 #include "Queue.h"
+#include <iostream>
+using namespace std;
 
 /** Deletes the queue and free up its memory. */
 Queue::~Queue() {
     delete[] m_Data;
 }
 
-//TODO follow the templates of the other files
+Queue::Queue(int new_max_size) {
+    m_MaxSize = new_max_size;
+    m_Data = new int[m_MaxSize];
+    m_First = 0;
+    m_Last = 0;
+}
+
+/** Indicates whether of not the queue is empty in O(1), true if empty, false if not. */
+bool Queue::IsEmpty() {
+    return m_First == m_Last;
+}
+
+/** Indicates whether of not the queue is full in O(1), true if full, false if not. */
+bool Queue::IsFull() {
+    return (m_Last + 1) % m_MaxSize == m_First;
+}
+
+/** Prints the content of the queue on a single line, separated by comma, eg: [3, 19, 2, 36]. */
+
+void Queue::PrintQueue() {
+    if (IsEmpty()) {
+        cout << "[]" << endl;
+    } else {
+        cout << "[";
+        for (int i = m_First; i != m_Last; i = (i + 1) % m_MaxSize) {
+            cout << m_Data[i];
+            if ((i + 1) % m_MaxSize != m_Last) {
+                cout << ", ";
+            }
+        }
+        cout << "]" << endl;
+    }
+}
+
+/** Inserts an element at the end of the queue, returns true if succeed, and false if the queue is already full. */
+bool Queue::Enqueue(int new_value) {
+    if (IsFull()) {
+        return false;
+    } else {
+        m_Data[m_Last] = new_value;
+        m_Last = (m_Last + 1) % m_MaxSize;
+        return true;
+    }
+}
+
+/** Removes the element at the front of the queue and returns the element in the argument,
+ * returns true if succeed, and false if the queue is already full.  */
+bool Queue::Dequeue(int &old_value) {
+    if (IsEmpty()) {
+        return false;
+    } else {
+        old_value = m_Data[m_First];
+        m_First = (m_First + 1) % m_MaxSize;
+        return true;
+    }
+}
 
 
 
