@@ -26,16 +26,17 @@ Queue::Queue(int new_max_size) {
     m_Data = new int[m_MaxSize];
     m_First = 0;
     m_Last = 0;
+    m_Size = 0;
 }
 
 /** Indicates whether of not the queue is empty in O(1), true if empty, false if not. */
 bool Queue::IsEmpty() {
-    return m_First == m_Last;
+    return m_Size == 0;
 }
 
 /** Indicates whether of not the queue is full in O(1), true if full, false if not. */
 bool Queue::IsFull() {
-    return (m_Last + 1) % m_MaxSize == m_First;
+    return m_Size == m_MaxSize;
 }
 
 /** Prints the content of the queue on a single line, separated by comma, eg: [3, 19, 2, 36]. */
@@ -45,9 +46,9 @@ void Queue::PrintQueue() {
         cout << "[]" << endl;
     } else {
         cout << "[";
-        for (int i = m_First; i != m_Last; i = (i + 1) % m_MaxSize) {
-            cout << m_Data[i];
-            if ((i + 1) % m_MaxSize != m_Last) {
+        for (int i = 0; i < m_Size; i++) {
+            cout << m_Data[(m_First + i) % m_MaxSize];
+            if (i < m_Size - 1) {
                 cout << ", ";
             }
         }
@@ -62,6 +63,7 @@ bool Queue::Enqueue(int new_value) {
     } else {
         m_Data[m_Last] = new_value;
         m_Last = (m_Last + 1) % m_MaxSize;
+        m_Size++;
         return true;
     }
 }
@@ -74,6 +76,7 @@ bool Queue::Dequeue(int &old_value) {
     } else {
         old_value = m_Data[m_First];
         m_First = (m_First + 1) % m_MaxSize;
+        m_Size--;
         return true;
     }
 }

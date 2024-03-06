@@ -30,26 +30,21 @@ Stack::~Stack(){
  * Returns: true is empty, false if not
  */
 bool Stack::IsEmpty() {
-	return m_List.Length() == 0;
+    return m_List.Length() == 0;
 }
 
 /** Prints all the element of the stack using cout, from top to bottom (1 item per line).
  *  WHAT IS THE O() OF YOUR METHOD? EXPLAIN IN YOUR REPORT (or via couts in the main)
  */
 void Stack::PrintStack() {
-    while (!IsEmpty()) {
-        cout << Top() << endl;
-        Pop();
-    }
+    m_List.PrintList();
 }
 
 /** Adds a string on the top of the stack in O(1).
  * Args: New string to put on top of the stack.
  */
 void Stack::Push(const string &new_value) {
-    while (!IsEmpty()) {
-        m_List.InsertFirst(new_value);
-    }
+    m_List.InsertFirst(new_value);
 }
 
 /** Removes and returns the string on the top of the stack in O(1).
@@ -69,7 +64,7 @@ string Stack::Pop() {
  * */
 string Stack::Top() {
     if (!IsEmpty()) {
-        return m_List.RemoveFirst();
+        return m_List.GetValueAt(0);
     }
 	return {""};
 }

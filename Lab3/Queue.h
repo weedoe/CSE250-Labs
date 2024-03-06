@@ -25,6 +25,7 @@ private:
 		/** TODO PLEASE DESCRIBE */
 		int m_Last;
         // TODO: Add other instance variables or helper methods if needed
+        int m_Size;
 
 	public:
 		/** Constructs an empty queue of maximum size new_max_size */
