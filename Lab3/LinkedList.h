@@ -1,11 +1,22 @@
 /****************************************************************************\
  * LinkedList.h
  *
- *  Created on:
+ *  Created on: Mar 6, 2024
  *      Author: OCdt Paterson
  *
  *
- *  Implementation details: ?
+ *  Implementation details:
+ *  Creates a doubly linked list of strings.
+ *  The list is made with a Node struct.
+ *  The class LinkedList has a pointer to the first node in private.
+ *  The class LinkedList's public uses the following methods:
+ *  - LinkedList() constructor
+ *  - ~LinkedList() destructor
+ *  - Length() returns the length of the list in O(1)
+ *  - PrintList() prints all the element of the list
+ *  - InsertFirst(const string &new_value) inserts a new string in first position
+ *  - RemoveFirst() removes and returns the first element of the list
+ *  - GetValueAt(int index) returns the string at a given index
  *
  \***************************************************************************/
 
