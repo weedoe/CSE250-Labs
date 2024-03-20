@@ -13,6 +13,7 @@
 
 #include "BST.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -138,6 +139,9 @@ const char *BST::remove(int key) {
     if (z == nullptr) {
         return nullptr;
     }
+    // Create a copy of the data to return
+    char* dataCopy = new char[strlen(z->data) + 1];
+    strcpy(dataCopy, z->data);
     if (z->left == nullptr) {
         transplant(z, z->right);
     } else if (z->right == nullptr) {
@@ -153,10 +157,9 @@ const char *BST::remove(int key) {
         y->left = z->left;
         y->left->parent = y;
     }
-    return reinterpret_cast<const char *>(z);
-
+    delete z;
+    return dataCopy;
 }
-
 
 /** Computes and returns the height of the tree. */
 int BST::height() {

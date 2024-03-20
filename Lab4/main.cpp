@@ -34,7 +34,7 @@ int main() {
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result -> data;
     }
     cout << endl << "t->printTree() outputs ";
     t->printTree();
@@ -44,13 +44,14 @@ int main() {
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->key;
+        cout << (char *)result;
     }
-
+    delete t;
 
     cout << endl << "---------------- Question 2 ----------------" << endl;
+    t = new BST();
     cout << "Removing node key 5... ";
-    BSTNode *ret = (BSTNode *) t->remove(5);
+    auto *ret = (BSTNode *) t->remove(5);
     cout << endl << "Printing tree: " << endl;
     t->printTree();
     cout << endl << "Inserting node with key 5 and data 'data5': " << endl;
@@ -79,21 +80,21 @@ int main() {
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
     }
     cout << endl << "t->search(5) returns ";
     result = (BSTNode *) t->search(5);
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
     }
     cout << endl << "t->search(10) returns ";
     result = (BSTNode *) t->search(10);
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
     }
     cout << endl << "t->printTree() outputs ";
     t->printTree();
@@ -103,26 +104,21 @@ int main() {
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->key;
+        cout << (char *)result;
     }
     cout << endl << "t->remove(10) returns ";
     result = (BSTNode *) t->remove(10);
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
-    }
-    cout << endl << "t->remove(10) returns ";
-    result = (BSTNode *) t->remove(10);
-    if (result == nullptr) {
-        cout << "null";
-    } else {
-        cout << result->data;
+        cout << (char *) result;
     }
 
+    delete t;
 
 
     cout << endl << "---------------- Question 3 ----------------" << endl;
+    t = new BST();
     t->insert(10, "Data10");
     t->insert(5, "Data5");
     t->insert(15, "Data15");
@@ -144,27 +140,65 @@ int main() {
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
     }
     cout << endl <<  "result = t->search(100) returns ";
     result = (BSTNode *) t->search(100);
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
     }
     cout << endl << "result = t->search(5) returns ";
     result = (BSTNode *) t->search(5);
     if (result == nullptr) {
         cout << "null";
     } else {
-        cout << result->data;
+        cout << (char *)result->data;
+    }
+    cout << endl << "t->printTree() outputs ";
+    t->printTree();
+    cout << endl << "t->height() returns " << t->height();
+    delete t;
+    cout << endl << "---------------- Question 4 ----------------" << endl;
+    t = new BST();
+    t->insert(15, "Data15");
+    t->insert(14, "Data14");
+    t->insert(12, "Data12");
+    t->insert(13, "Data13");
+    t->insert(10, "Data10");
+    t->remove(13);
+    cout << "t->preOrder outputs ";
+    t->preOrder();
+    cout << endl << "t->postOrder outputs ";
+    t->postOrder();
+    cout << endl << "t->inOrder outputs ";
+    t->inOrder();
+    cout << endl << "result = t->search(12) returns ";
+    result = (BSTNode *) t->search(12);
+    if (result == nullptr) {
+        cout << "null";
+    } else {
+        cout << (char *)result->data;
+    }
+    cout << endl <<  "result = t->search(10) returns ";
+    result = (BSTNode *) t->search(10);
+    if (result == nullptr) {
+        cout << "null";
+    } else {
+        cout << (char *)result->data;
+    }
+    cout << endl << "result = t->search(13) returns ";
+    result = (BSTNode *) t->search(13);
+    if (result == nullptr) {
+        cout << "null";
+    } else {
+        cout << (char *)result->data;
     }
     cout << endl << "t->printTree() outputs ";
     t->printTree();
     cout << endl << "t->height() returns " << t->height();
 
-    cout << endl << "---------------- Question 4 ----------------" << endl;
 
 
 
