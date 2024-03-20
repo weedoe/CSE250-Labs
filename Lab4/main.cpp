@@ -198,14 +198,90 @@ int main() {
     cout << endl << "t->printTree() outputs ";
     t->printTree();
     cout << endl << "t->height() returns " << t->height();
+    delete t;
 
 
+    cout << endl << "---------------- Question 5 ----------------" << endl;
+    t = new BST();
+    t->insert(15, "Data15");
+    t->insert(16, "Data16");
+    t->insert(19, "Data19");
+    t->insert(17, "Data17");
+    t->insert(20, "Data20");
+    t->remove(19);
+    t->printTree();
+    t->remove(15);
+    t->printTree();
+    cout << endl << "t->preOrder outputs ";
+    t->preOrder();
+    cout << endl << "t->postOrder outputs ";
+    t->postOrder();
+    cout << endl << "t->inOrder outputs ";
+    t->inOrder();
+    cout << endl << "result = t->search(15) returns ";
+    result = (BSTNode *) t->search(15);
+    if (result == nullptr) {
+        cout << "null";
+    } else {
+        cout << (char *)result->data;
+    }
+    cout << endl <<  "result = t->search(20) returns ";
+    result = (BSTNode *) t->search(20);
+    if (result == nullptr) {
+        cout << "null";
+    } else {
+        cout << (char *)result->data;
+    }
+    cout << endl << "printTree() outputs ";
+    t->printTree();
+    cout << endl << "t->height() returns " << t->height();
+    delete t;
 
+    cout << endl << "---------------- Question 6 ----------------" << endl;
+    t = new BST();
+t->insert(-10, "Data-10");
+t->insert(-25, "Data-25");
+t->insert(-30, "Data-30");
+t->insert(-35, "Data-35");
+t->insert(-5, "Data-5");
+t->insert(-7, "Data-7");
+t->insert(-8, "Data-8");
+t->insert(-4, "Data-4");
+t->insert(-3, "Data-3");
+t->insert(6, "Data6");
+t->remove(-10);
 
-
-
-
-
+cout << "t->preOrder outputs ";
+t->preOrder();
+cout << endl << "t->postOrder outputs ";
+t->postOrder();
+cout << endl << "t->inOrder outputs ";
+t->inOrder();
+cout << endl << "result = t->search(-8) returns ";
+result = (BSTNode *) t->search(-8);
+if (result == nullptr) {
+    cout << "null";
+} else {
+    cout << (char *)result->data;
+}
+cout << endl <<  "result = t->search(-25) returns ";
+result = (BSTNode *) t->search(-25);
+if (result == nullptr) {
+    cout << "null";
+} else {
+    cout << (char *)result->data;
+}
+cout << endl << "result = t->search(-10) returns ";
+result = (BSTNode *) t->search(-10);
+if (result == nullptr) {
+    cout << "null";
+} else {
+    cout << (char *)result->data;
+}
+cout << endl << "t->printTree() outputs ";
+t->printTree();
+cout << endl << "t->height() returns " << t->height();
+delete t;
 
     return 0;
 }
