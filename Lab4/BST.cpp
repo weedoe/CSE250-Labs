@@ -173,11 +173,12 @@ void BST::preOrder() {
         cout << "[]";
         return;
     }
-    stack<BSTNode *> nodeStack;
+
+    stack<BSTNode*> nodeStack;
     nodeStack.push(m_root);
 
     while (!nodeStack.empty()) {
-        BSTNode *node = nodeStack.top();
+        BSTNode* node = nodeStack.top();
         cout << node->key << ", ";
         nodeStack.pop();
 
@@ -196,20 +197,21 @@ void BST::inOrder() {
         cout << "[]";
         return;
     }
-    stack<BSTNode *> nodeStack;
-    nodeStack.push(m_root);
 
-    while (!nodeStack.empty()) {
-        BSTNode *node = nodeStack.top();
-        cout << node->key << ", ";
+    stack<BSTNode*> nodeStack;
+    BSTNode* curr = m_root;
+
+    while (curr != nullptr || !nodeStack.empty()) {
+        while (curr != nullptr) {
+            nodeStack.push(curr);
+            curr = curr->left;
+        }
+        curr = nodeStack.top();
         nodeStack.pop();
 
-        if (node->right) {
-            nodeStack.push(node->right);
-        }
-        if (node->left) {
-            nodeStack.push(node->left);
-        }
+        cout << curr->key << ", ";
+
+        curr = curr->right;
     }
 }
 
@@ -219,20 +221,27 @@ void BST::postOrder() {
         cout << "[]";
         return;
     }
-    stack<BSTNode *> nodeStack;
-    nodeStack.push(m_root);
 
-    while (!nodeStack.empty()) {
-        BSTNode *node = nodeStack.top();
-        cout << node->key << ", ";
-        nodeStack.pop();
+    stack<BSTNode*> s1, s2;
+    s1.push(m_root);
 
-        if (node->right) {
-            nodeStack.push(node->right);
-        }
+    while (!s1.empty()) {
+        BSTNode* node = s1.top();
+        s1.pop();
+        s2.push(node);
+
         if (node->left) {
-            nodeStack.push(node->left);
+            s1.push(node->left);
         }
+        if (node->right) {
+            s1.push(node->right);
+        }
+    }
+
+    while (!s2.empty()) {
+        BSTNode* node = s2.top();
+        s2.pop();
+        cout << node->key << ", ";
     }
 }
 

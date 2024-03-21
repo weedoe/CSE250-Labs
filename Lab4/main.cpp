@@ -58,7 +58,7 @@ int main() {
     t->insert(5, "data5");
     cout << "Printing tree: " << endl;
     t->printTree();
-    cout << "Removing node key 5 again... ";
+    cout << endl << "Removing node key 5 again... ";
     ret = (BSTNode *) t->remove(5);
     cout << endl << "Adding key 10 and data 'data10'... ";
     t->insert(10, "data10");
