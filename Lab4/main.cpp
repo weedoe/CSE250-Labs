@@ -3,12 +3,6 @@
 *
 *  Created on: Mar 7 2024
 *      Author: OCdt Paterson
- *
-*
-*  TODO: Make sure to demonstrate the appropriate functionality of your
-*  binary search tree by testing ALL the cases in provided documents.
-*  Your output must be EXPLICIT about what is tested and what is the result.
-*
 \***************************************************************************/
 
 #include <iostream>
@@ -30,7 +24,7 @@ int main() {
 
 
     cout << endl << "t->search(4) returns ";
-    BSTNode* result = (BSTNode *) t->search(4);
+    auto* result = (BSTNode *) t->search(4);
     if (result == nullptr) {
         cout << "null";
     } else {
@@ -203,6 +197,7 @@ int main() {
 
     cout << endl << "---------------- Question 5 ----------------" << endl;
     t = new BST();
+    cout << "Drawing new tree with 15 as root and 16, 19, 17, 20 as children..." << endl;
     t->insert(15, "Data15");
     t->insert(16, "Data16");
     t->insert(19, "Data19");

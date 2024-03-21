@@ -5,7 +5,7 @@
  *      Author: OCdt Paterson
  *
  *
- *  Implementation details: ?
+ *  Implementation details: see BST.cpp
  *
 \***************************************************************************/
 
@@ -39,9 +39,6 @@ class BST {
 	private:
 		/** Pointer to the root node of the tree, or NULL if empty */
 		BSTNode* m_root;
-		//TODO Add your other BST private variables
-
-
 		/** Minimum: Finds and returns the node with the smallest key */
 		BSTNode* _min(BSTNode* x);
 		/** Successor: Returns the node following node x in key order in the whole tree */
@@ -49,9 +46,6 @@ class BST {
 
 		/** Computes and returns the height of the node x. */
 		int _height(BSTNode* x);
-
-		//TODO Add your other BST private helper methods here
-
 	public:
 		/** Construct an empty binary search tree. */
 		BST();
@@ -66,7 +60,6 @@ class BST {
 		void insert(int key, const char* data);
 		/** Deletes a the node with (key) from the tree and returns the associated (data) or NULL if not found. */
 		const char* remove(int key);
-
 		/** Computes and returns the height of the tree. */
 		int height();
 
@@ -76,7 +69,7 @@ class BST {
 		void inOrder();
 		/** Prints the keys (comma separated) of the tree using an postorder traversal. */
 		void postOrder();
-
+        /** Transplants the subtree rooted at node v to replace the subtree rooted at node u. */
         void transplant(BSTNode* u, BSTNode* v);
 
 };
