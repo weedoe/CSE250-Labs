@@ -149,7 +149,7 @@ const char *BST::remove(int key) {
         return nullptr; // Return null
     }
     // Create a copy of the data to return
-    char* dataCopy = new char[strlen(z->data) + 1]; // Create a new char array with the length of the data of z + 1
+    char *dataCopy = new char[strlen(z->data) + 1]; // Create a new char array with the length of the data of z + 1
     strcpy(dataCopy, z->data); // Copy the data of z to dataCopy
     if (z->left == nullptr) { // If the left child of z is null
         transplant(z, z->right); // Move the right child of z to the place of z
@@ -183,11 +183,11 @@ void BST::preOrder() {
         return;
     }
 
-    stack<BSTNode*> nodeStack; // Create a new stack of BSTNode
+    stack<BSTNode *> nodeStack; // Create a new stack of BSTNode
     nodeStack.push(m_root); // Push the root to the stack
 
     while (!nodeStack.empty()) { // While the stack is not empty
-        BSTNode* node = nodeStack.top(); // Set node to the top of the stack
+        BSTNode *node = nodeStack.top(); // Set node to the top of the stack
         cout << node->key << ", "; // Print the key of the node
         nodeStack.pop(); // Pop the top of the stack
         if (node->right) { // If the right child of the node is not null
@@ -206,8 +206,8 @@ void BST::inOrder() {
         return;
     }
 
-    stack<BSTNode*> nodeStack; // Create a new stack of BSTNode
-    BSTNode* curr = m_root; // Set curr to the root
+    stack<BSTNode *> nodeStack; // Create a new stack of BSTNode
+    BSTNode *curr = m_root; // Set curr to the root
 
     while (curr != nullptr || !nodeStack.empty()) { // While curr is not null or the stack is not empty
         while (curr != nullptr) { // While curr is not null
@@ -229,11 +229,11 @@ void BST::postOrder() {
         return;
     }
 
-    stack<BSTNode*> s1, s2; // Create two new stacks of BSTNode
+    stack<BSTNode *> s1, s2; // Create two new stacks of BSTNode
     s1.push(m_root); // Push the root to s1
 
     while (!s1.empty()) { // While s1 is not empty
-        BSTNode* node = s1.top(); // Set node to the top of s1
+        BSTNode *node = s1.top(); // Set node to the top of s1
         s1.pop(); // Pop the top of s1
         s2.push(node); // Push node to s2
 
@@ -246,7 +246,7 @@ void BST::postOrder() {
     }
 
     while (!s2.empty()) { // While s2 is not empty
-        BSTNode* node = s2.top(); // Set node to the top of s2
+        BSTNode *node = s2.top(); // Set node to the top of s2
         s2.pop(); // Pop the top of s2
         cout << node->key << ", "; // Print the key of node
     }
