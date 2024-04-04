@@ -52,13 +52,8 @@ private:
 	/** Coloring variable for each server. */
 	color* m_Colors;
 
-	//Put any extra network variables you want here
-
-
 	/** This method colors all vertices in the graph WHITE. */
 	void whiten();
-
-	//Put any extra private helper methods you want here
 
 
 public:

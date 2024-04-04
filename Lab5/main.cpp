@@ -67,15 +67,17 @@ int main() {
 	string line;
 	getline(myfile, line);
 	vector<string> split_line = split(line, ',');
-	Network* net = new Network(split_line);
+	auto* net = new Network(split_line);
 
 	//Read the file line by line in order to add the connections to the network object
 	//The first IP on each line is a server IP
 	//Each following IP on the same line is a server connected to the 1st IP of the line
 	while (!myfile.eof()){
-
-		//TODO
-
+        getline(myfile, line);
+        split_line = split(line, ',');
+        for (int i=1; i<split_line.size(); i++){
+            net->AddConnection(split_line[0], split_line[i]);
+        }
 	}
 
 	//Don't forget to close the file once your done
@@ -88,6 +90,5 @@ int main() {
 	cout << net->FindShortestPath("189.126.251.225", "106.140.246.211") << endl;
 	cout << net->FindShortestPath("189.126.251.225", "102.130.212.124") << endl;
 	cout << net->FindShortestPath("189.126.251.225", "168.135.60.189") << endl;
-
 	return 0;
 }
