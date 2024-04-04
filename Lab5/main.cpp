@@ -74,6 +74,7 @@ int main() {
 	//Each following IP on the same line is a server connected to the 1st IP of the line
 	while (!myfile.eof()){
         getline(myfile, line);
+        if(line.empty()) continue; // Break if the line is empty (EOF
         split_line = split(line, ',');
         for (int i=1; i<split_line.size(); i++){
             net->AddConnection(split_line[0], split_line[i]);
@@ -90,5 +91,6 @@ int main() {
 	cout << net->FindShortestPath("189.126.251.225", "106.140.246.211") << endl;
 	cout << net->FindShortestPath("189.126.251.225", "102.130.212.124") << endl;
 	cout << net->FindShortestPath("189.126.251.225", "168.135.60.189") << endl;
+    delete net;
 	return 0;
 }

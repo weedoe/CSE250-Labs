@@ -1,4 +1,4 @@
-/*
+/**
  * Network.h
  *
  * OCdt Paterson 30648
@@ -117,7 +117,7 @@ string Network::FindShortestPath(const string& homeServer, const string& targetS
 	int destination = m_IP2Vertex[targetServer];
 	//Debug statement
 	cout << "Finding fastest path from  " << home << " to " << destination << endl;
-    int* distances = new int[GetNetworkSize()];
+    int* distances = new int[GetNetworkSize()]; //remember to delete these at the end
 	int* parents = new int[GetNetworkSize()];
     for (int i=0; i<m_NetworkSize; i++) {
         distances[i] = -1;
@@ -155,8 +155,12 @@ string Network::FindShortestPath(const string& homeServer, const string& targetS
                 path += ",";
             }
         }
+        delete[] distances;
+        delete[] parents;
         return path;
     }
+    delete[] distances;
+    delete[] parents;
     return "Path from " + homeServer + " to " + targetServer + " not found!";
 }
 
