@@ -119,47 +119,47 @@ string Network::FindShortestPath(const string& homeServer, const string& targetS
 	cout << "Finding fastest path from  " << home << " to " << destination << endl;
     int* distances = new int[GetNetworkSize()]; //remember to delete these at the end
 	int* parents = new int[GetNetworkSize()];
-    for (int i=0; i<m_NetworkSize; i++) {
+    for (int i=0; i<m_NetworkSize; i++) { //initialize distances and parents
         distances[i] = -1;
         parents[i] = -2;
     }
-    distances[home] = 0;
-    myqueue.push(home);
+    distances[home] = 0; //initialize the home server
+    myqueue.push(home); //push the home server to the queue
     while (!myqueue.empty()) {
-        int current = myqueue.front();
+        int current = myqueue.front(); //get the front of the queue
         myqueue.pop();
-        EdgeListNode* edge = m_EdgeLists[current];
-        while (edge != nullptr) {
-            if (m_Colors[edge->v2] == WHITE) {
-                m_Colors[edge->v2] = GRAY;
-                distances[edge->v2] = distances[current] + 1;
-                parents[edge->v2] = current;
-                myqueue.push(edge->v2);
+        EdgeListNode* edge = m_EdgeLists[current]; //get the edge list of the current server
+        while (edge != nullptr) { //while the edge is not null
+            if (m_Colors[edge->v2] == WHITE) { //if the color of the destination server is white
+                m_Colors[edge->v2] = GRAY; //change the color to gray
+                distances[edge->v2] = distances[current] + 1; //increment the distance
+                parents[edge->v2] = current; //set the parent of the destination server to the current server
+                myqueue.push(edge->v2); //push the destination server to the queue
             }
-            edge = edge->next;
+            edge = edge->next; //move to the next edge
         }
-        m_Colors[current] = BLACK;
+        m_Colors[current] = BLACK; //change the color of the current server to black
     }
-    if (distances[destination] != -1) {
-        int current = destination;
-        while (current != home) {
-            mystack.push(m_Vertex2IP[current]);
-            current = parents[current];
+    if (distances[destination] != -1) { //if the distance to the destination server is not -1
+        int current = destination; //set the current server to the destination server
+        while (current != home) { //while the current server is not the home server
+            mystack.push(m_Vertex2IP[current]); //push the IP of the current server to the stack
+            current = parents[current]; //set the current server to its parent
         }
-        mystack.push(homeServer);
-        string path = "";
-        while (!mystack.empty()) {
-            path += mystack.top();
-            mystack.pop();
-            if (!mystack.empty()) {
-                path += ",";
+        mystack.push(homeServer); //push the home server to the stack
+        string path = ""; //initialize the path
+        while (!mystack.empty()) { //while the stack is not empty
+            path += mystack.top(); //add the top of the stack to the path
+            mystack.pop(); //pop the top of the stack
+            if (!mystack.empty()) { //if the stack is not empty
+                path += ","; //add a comma to the path
             }
         }
-        delete[] distances;
+        delete[] distances; //delete the distances array
         delete[] parents;
         return path;
     }
-    delete[] distances;
+    delete[] distances; //delete the distances array
     delete[] parents;
     return "Path from " + homeServer + " to " + targetServer + " not found!";
 }
